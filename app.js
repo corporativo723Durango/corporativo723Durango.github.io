@@ -5,13 +5,15 @@ const bodyParser = require('body-parser')
 var logger = require('morgan');
 require("dotenv").config()
 
-
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var colCPRouter = require('./routes/coloniasCP');
 var upload = require("./routes/uploadFile");
 var cliente = require("./routes/clientes");
+var alamierda = require('./routes/alamierda');
+
+
+
 
 
 
@@ -36,6 +38,8 @@ app.use('/users', usersRouter);
 app.use('/coloniasCP',colCPRouter);
 app.use("/uploadFile",upload);
 app.use("/cliente",cliente);
+app.use("/alamierda",alamierda);
+
 
 
 

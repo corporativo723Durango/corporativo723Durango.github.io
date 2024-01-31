@@ -46,12 +46,11 @@ function onApiLoad(url){
 
 
 function popInfo(e){  
-    fetch('/textos')
+    fetch(`alamierda?id=${e.currentTarget.id}`)
     .then((response) => response.json())
     .then((json) => {
-         obj = JSON.parse(json)[0]
-         o = obj.nuevoCli.tooltip
-         $("#popUp").html($("<div>").addClass("popInfo").html(o[e.currentTarget.id]).css({"top":e.pageY+"px","left":e.pageX+"px"}))
+      
+         $("#popUp").html($("<div>").addClass("popInfo").html(json).css({"top":e.pageY+"px","left":e.pageX+"px"}))
          $("#popUp").removeClass("ocultar")
         })
 }
