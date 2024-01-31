@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../javascripts/jquery-3.7.1.js"></script>
+    <script src="../javascripts/uoload/file-upload.js"></script>
+  
+    <link rel="stylesheet" href="../javascripts/uoload/file-upload.css">
+  <link rel="stylesheet" href="../stylesheets/styleNew.css">
+</head>
+<body>
+    
+
+    <form action="Javascript:newUsu()" method="post">
+        <fieldset  class="_datPerso">Datos Personales<br>
+            <input type="text" id="nombre" class="enlinea imp w200" placeholder="Nombre" required>
+            <input type="text" id="paterno" class="enlinea imp w200" placeholder="Apellido paterno" required>
+            <input type="text" id="materno" class="enlinea imp w200" placeholder="Apellido materno">
+            <input type="date" id="fecha_nac" class="blo w150" placeholder="Fecha Nacimiento" required>
+            <input type="text" id="cveElector" class="blo w150" placeholder="Clave de Elector" required>
+            <input type="tel"  id="tel " class="blo w200" placeholder="999-9999999" pattern="[0-9]{3}-[0-9]{7}" required>
+            <div id="drop-area">
+                <form class="my-form">
+                  <p>Arrastrar  y Soltar archivo en esta área</p>
+                  <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+                  <label class="button" for="fileElem">Selecciona algun archivo</label>
+                </form>
+                <div id="gallery"></div>
+            </div>
+            <progress id="progress-bar" max=100 value=0></progress>
+
+        </fieldset>
+        <fieldset class="direccion">Dirección<br>
+            <input type="text" class="enlinea w300" id="calle" placeholder="Calle, Avenida, Carretera, Andador, etc..." required>
+            <input type="number" class="enlinea w100" id="num_ex" placeholder="Numero ext" required>
+            <input type="text" class="enlinea w100" id="num_int"  placeholder="Numero int">
+            <input type="text" pattern="[3][0-9]{4}" class="enlinea w100" id="cp"  placeholder="Código Postal" max="35000" min="34000" maxlength="5" required>
+            <select class="enlinea w150" name="colonias" id="col" placeholder="Seleccione colonia"></select>
+
+            
+            
+        </fieldset>
+        <input type="submit" value="Crear" class="btnUsu">
+    </form>
+
+
+
+
+    <div id="fileuploader">Upload</div>
+
+    <script>
+       
+
+        $("#drop-area").css({"position":"absolute","top":"150px","z-index":"9999"})
+        let filesDone = 0
+        let filesToDo = 0
+        let progressBar = document.getElementById('progress-bar')
+
+         let dragdrop = document.getElementById("drop-area")
+        let arrastrar=['dragenter', 'dragover', 'dragleave', 'drop']
+        arrastrar.forEach(e=>{
+            dragdrop.addEventListener(e,preventDefaults,false)
+        })
+
+       
+        function previewFile(file) {
+            let reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onloadend = function() {
+              let img = document.createElement('img')
+              img.src = reader.result
+              document.getElementById('gallery').appendChild(img)
+            }
+          }
+          
+        function preventDefaults(e){
+            console.log(e)
+            e.preventDefault()
+            e.stopPropagation()
+          //  $(".ajs-modal").css({"background":"rgba(255,255,255,0.5)","border":"5px dashed gray"})
+        }
+        function initializeProgress(numfiles) {
+            progressBar.value = 0
+            filesDone = 0
+            filesToDo = numfiles
+          }
+          
+          function progressDone() {
+            filesDone++
+            progressBar.value = filesDone / filesToDo * 100
+          }
+
+          function handleFiles(files) {
+            files = [...files]
+            initializeProgress(files.length) // <- Add this line
+            files.forEach(uploadFile)
+            files.forEach(previewFile)
+          }
+          
+          function uploadFile(file) {
+            let url = '/uploadFile'
+            let formData = new FormData()
+          
+            formData.append('file', file)
+          
+            fetch(url, {
+              method: 'POST',
+              body: formData
+            })
+            .then(progressDone) // <- Add `progressDone` call here
+            .catch(() => { /* Error. Inform the user */ })
+          }
+          
+      
+        $("#cp").keyup(e=>{  
+                let cp = parseInt($("#cp").val())
+                if(cp >= 34000){                    
+                    $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {
+                        $("#col").html("")                        
+                        data.forEach(e=>{ $("#col").append($("<option>").val(e).html(e))})                
+                    })
+                 }else{
+                    $("#col").html("")                    
+                 }
+                               
+    })
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+
+
+<html>
+  <head>
+    <title>Dirección del cliente</title>
+    <script src="../javascripts/jquery-3.7.1.js" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="module" src="mapGoogle.js"></script>
+  </head>
+  <body>
+   
+    <label for="x"> </label>
+
+    <div class="pac-card" id="pac-card">
+      <div id="pac-container">
+        <input id="pac-input" type="text" placeholder="Escriba dirección" />
+      </div>
+    </div>
+    <div id="map"></div>
+    <div id="infowindow-content">
+      <span id="place-name" class="title"></span><br />
+      <span id="place-address"></span>
+    </div>
+
+    <script
+    src="https://maps.googleapis.com/maps/api/js?v=4&key=AIzaSyDi2xjZpxYm9FK2BqWWxwN1CBEcckvUCho&callback=initMap&libraries=places&v=weekly"
+    defer
+  ></script>
+
+
+
+
+    <!-- 
+
+    <script
+    src="https://maps.googleapis.com/maps/api/js?v=4&key=AIzaSyDi2xjZpxYm9FK2BqWWxwN1CBEcckvUCho&callback=initMap&libraries=places&v=weekly"
+    defer
+  ></script>
+
+      AIzaSyByZpNSgqlZaDWxmzKa0ybOeUNzbM1bP5g
+
+
+
+      The `defer` attribute causes the callback to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across browsers, consider loading using Promises.
+      See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
+      for more information.
+   
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+       -->
+  </body>
+</html>
