@@ -1,0 +1,117 @@
+/* 
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ */
+ #map {
+  height: 100%;
+  position:static !important;
+  overflow: hidden !important;
+}
+
+.ajs-content{
+  overflow: hidden !important;
+}
+:root{
+  --main-bg-color: rgba(255,255,255,0.1);
+}
+
+/* 
+ * Optional: Makes the sample page fill the window. 
+ */
+
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#infowindow-content .title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
+}
+
+.pac-card {
+  position: absolute;
+  border: 0;
+  border-top-right-radius: 10px;
+  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+  margin: 10px;
+  overflow: hidden;
+  font-family:  "Century Gothic";
+  padding: 5px 5px 1px 5px;
+  height: 40px;
+  z-index:99;
+}
+
+#pac-container {
+  position:relative;
+  height: 100%;
+  padding: 3px 3px 0px 3px;
+  margin: 0px;
+}
+
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background: rgba(255, 255, 255, 0.3);
+  color:black;
+  font-family: "Century Gothic";
+  font-size: 15px;
+  font-weight: 300;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 200px;
+  height: 30px;
+  border:none;
+  border-bottom: 1px solid rgb(103, 102, 102);
+  border-radius: 5px;
+}
+
+@keyframes change-width {
+   from{ width: 200px; background:rgba(255, 255, 255, 0.3); border-bottom: 1px solid rgb(103, 102, 102);}
+   to{width: 400px; background:rgba(255, 255, 255, 0.95); border-bottom: 2px solid rgb(0,0,0);} 
+}
+
+
+#pac-input:hover{
+  animation: change-width 0.5s linear ;
+  width: 400px; background:rgba(255, 255, 255, 0.95); border-bottom: 2px solid rgb(0,0,0);
+}
+
+#pac-input:focus{
+  background:rgba(255, 255, 255, 0.95);
+  width: 400px;
+  box-shadow: gray;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.91);
+  border-top-right-radius: 10px;
+}
+
+
+
+
+#title {
+  color: #fff;
+  background-color: #17171893;
+  font-size: 20px;
+  font-weight: 300;
+  padding: 6px 12px;
+}
+
+

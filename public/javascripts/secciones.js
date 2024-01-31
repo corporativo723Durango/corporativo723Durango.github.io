@@ -43,7 +43,7 @@ function _sec(_i){
 
 function alertas($d){
     console.log($d.$c)
-    alertify.alert().setContent($d.$c).set({"label":$d.btn,"title":$d.t,"resizable":true,"invokeOnCloseOff":true,
+    alertify.alert().setContent($d.$c).set({label:$d.btn,"title":$d.t,"resizable":true,"invokeOnCloseOff":true,
             onok:function(closeEvent){console.log(closeEvent.button.element.innerHTML); 
                 closeEvent.button.element.innerHTML == "Guardar" ? 
                 alertify.confirm("El nuevo cliente se guardará con folio: XXX. ¿Esta seguro de terminar esta acción?").set({onok:(closeEvent)=>{  valida();  alertify.success("Nuevo Cliente guardado");alertify.alert().close()}}) 

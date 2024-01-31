@@ -39,21 +39,19 @@ function onApiLoad(url){
 }
 
 
+
+
+
+
+
+
 function popInfo(e){  
-    obj={
-        nombre:"Nombre o nombres tal como aparece en su identificacion",
-        paterno:"Apellido materno tal como aparece en su identificacion",
-        materno:"Nombre o nombres tal como aparece en su identificacion",
-        telefono:"Número telefónico del cliente a 10 digitos",
-        ocr: _div("grupoElec","x",$("<img>").attr({"src":"../images/nuevoCliente/ocr1.jpg"})).append($("<img>").attr({"src":"../images/nuevoCliente/ocr2.jpg"})),
-        calle:"Nombre de la calle, Av. Blvd, Privada, Circuito, Carretera etc",
-        num_ext:"Número exterior de la vivienda",
-        num_int:"Numero interior del condominio, edificio, etc. en caso de tener. OPCIONAL",
-        cp:"Código Postal, al teclar las 5 cifras se cargaran las colonias que pertenecen a este CP en la siguiente lista",
-        antiguedad:"Antigüedad en años de la vivienda",
-        ubi: "Ubicación de la vivienda en coordenadas geograficas decimales separadas por una coma. ej. 22.3651,-102.3654 "
-    }
-    
-   $("#popUp").html($("<div>").addClass("popInfo").html(obj[e.currentTarget.id]).css({"top":e.pageY+"px","left":e.pageX+"px"}))
-   $("#popUp").removeClass("ocultar")
+    fetch('/textos')
+    .then((response) => response.json())
+    .then((json) => {
+         obj = JSON.parse(json)[0]
+         o = obj.nuevoCli.tooltip
+         $("#popUp").html($("<div>").addClass("popInfo").html(o[e.currentTarget.id]).css({"top":e.pageY+"px","left":e.pageX+"px"}))
+         $("#popUp").removeClass("ocultar")
+        })
 }

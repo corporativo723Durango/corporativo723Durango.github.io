@@ -9,7 +9,7 @@
     $fs1.append(_inp("text","nombre","enlinea imp w200","Nombre",true,"Emmanuel",64,gpo="personales")).append(_inp("text","paterno","enlinea imp w200","Apellido Paterno",true,"Rodriguez",64,gpo="personales"))
     .append(_inp("text","materno","enlinea imp w200","Apelllido Materno",true,"García",64,gpo="personales")).append($("<div>").addClass("grupo").append($("<label>").html("Fecha de Nacimiento: ")).append(_inp("date","fecha_nac","enlinea w150","Fecha de Nacimiento",true,"1984/08/01",-1,gpo="personales")))       
     .append($("<div>").addClass("grupo").append($("<label>").html("Lugar de Nacimiento: ")).append(_selec("entidad","ent",edos,10,gpo="personales"))).append(_inp("text","telefono","enlinea w100","Num. Teléfono",true,"618",10,gpo="personales"))
-    .append(_inp("text","ocr","enlinea w150","OCR de elector",true,"452569874525125",13,gpo="personales")).append(_div("fileuploader","subirCredencial enlinea","Arrastre  y suelte la imagen de la credencial"))
+    .append(_inp("text","ocr","enlinea w150","OCR de elector",true,"452569874525125",13,gpo="personales")).append(_div("fileuploader","subirCredencial enlinea","Arrastre  y suelte la imagen de la credencial")).append(_div("btnLimpiar","btn","Limpiar Formulario").click(function(){ limpiar()}))
     
     $fs2.append(_inp("text","calle","enlinea w300","Calle, Avenida, Carretera, etc",true,"Av Santoral")).append(_inp("number","num_ext","enlinea  w100","Num ext",true,"206",5))
     .append(_inp("text","num_int","enlinea  w100","Num int",false,"1",10)).append(_inp("text","cp","enlinea w100","Código Postal",true,"34230",5))
@@ -81,9 +81,12 @@ function guardarCliente(x){
     let query =  JSON.stringify({"personales":JSON.stringify(x.personales),"domicilio":JSON.stringify(x.domicilio),"fecha_alt":Date(),"estatus":true,"verificado":false,"calificacion":100})
     $.post("/cliente/nuevo",JSON.parse(query)).done(function(m){
         alertify.success(m.mensaje)
-    })
+    })   
+}
 
-    
+function limpiar(){
+    $("input[type=text],input[type=number]").val("")
+   
 }
 
 

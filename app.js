@@ -14,6 +14,9 @@ var upload = require("./routes/uploadFile");
 var cliente = require("./routes/clientes");
 
 
+
+
+
 var app = express();
 
 
@@ -31,11 +34,13 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/coloniasCP',colCPRouter);
-app.use("/uploadFile",upload)
-app.use("/cliente",cliente)
+app.use("/uploadFile",upload);
+app.use("/cliente",cliente);
 
 
-// caDFSS
+
+
+// caDFSSinfo
 app.use(function(req, res, next) {
   next(createError(404));
 });
