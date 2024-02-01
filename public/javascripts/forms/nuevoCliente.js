@@ -6,13 +6,13 @@
     let $fs2 = $("<fielset>").addClass("_domicilio").html("<h3>Domicilio</h3><br>")
     let $fs3 = $("<fielset>").addClass("fotos").html("<h3>Evidencias Fotograficas</h3><br>")
     
-    $fs1.append(_inp("text","nombre","enlinea imp w200","Nombre",true,"Emmanuel",64,gpo="personales")).append(_inp("text","paterno","enlinea imp w200","Apellido Paterno",true,"Rodriguez",64,gpo="personales"))
-    .append(_inp("text","materno","enlinea imp w200","Apelllido Materno",true,"García",64,gpo="personales")).append($("<div>").addClass("grupo").append($("<label>").html("Fecha de Nacimiento: ")).append(_inp("date","fecha_nac","enlinea w150","Fecha de Nacimiento",true,"1984/08/01",-1,gpo="personales")))       
+    $fs1.append(_inp("text","nombre","enlinea imp w200","Nombre",true,"Emmanuel",64,gpo="personales")).append(_inp("text","paterno","enlinea imp w200","Apellido Paterno",true,"",64,gpo="personales"))
+    .append(_inp("text","materno","enlinea imp w200","Apelllido Materno",true,"García",64,gpo="personales")).append($("<div>").addClass("grupo").append($("<label>").html("Fecha de Nacimiento: ")).append(_inp("date","fecha_nac","enlinea w150","Fecha de Nacimiento",true,"{{formatDate invoice.date 'DD-MM-YYYY'}}",32,gpo="personales").attr({"max":"2006-01-01","valuesAsDate":"2006-01-02"})))       
     .append($("<div>").addClass("grupo").append($("<label>").html("Lugar de Nacimiento: ")).append(_selec("entidad","ent",edos,10,gpo="personales"))).append(_inp("text","telefono","enlinea w100","Num. Teléfono",true,"618",10,gpo="personales"))
     .append(_inp("text","ocr","enlinea w150","OCR de elector",true,"452569874525125",13,gpo="personales")).append(_div("fileuploader","subirCredencial enlinea","Arrastre  y suelte la imagen de la credencial")).append(_div("btnLimpiar","btn","Limpiar Formulario").click(function(){ limpiar()}))
     
     $fs2.append(_inp("text","calle","enlinea w300","Calle, Avenida, Carretera, etc",true,"Av Santoral")).append(_inp("number","num_ext","enlinea  w100","Num ext",true,"206",5))
-    .append(_inp("text","num_int","enlinea  w100","Num int",false,"1",10)).append(_inp("text","cp","enlinea w100","Código Postal",true,"34230",5))
+    .append(_inp("text","num_int","enlinea  w100","Num int",false,"1",10)).append(_inp("text","cp","enlinea w100","Código Postal",true,"",5))
     .append(_selec("colonia","enlinea w150",["Colonia"],1,"domicilio")).append($("<div>").addClass("grupo").append($("<label>").html("Propiedad: ")).append(_selec("propiedad","enlinea w100 ent",prop)))
     .append(_inp("number","antiguedad","enlinea w100","Antigüedad",true,5)).append($("<div>").addClass("grupo").append($("<label>").html("Ubicación: ")).append(_inp("text","ubi","enlinea w200","Latitud , Longitud",false,"22.3651,-102.325")).append($("<span>").addClass("material-symbols-outlined simbolMap").html("home_pin")))
     .append(_div("mapaUbi","mapaUbi","Mapa para ubicar").toggle())
@@ -86,8 +86,8 @@ function guardarCliente(x){
 
 function limpiar(){
     $("input[type=text],input[type=number]").val("")
-   
 }
+
 
 
 
@@ -101,7 +101,7 @@ function _div(id="",clase="",html=""){
 }
 function _inp(tipo,id="",clase="",ph="",req=false,valor="",max=-1,gpo="domicilio"){
     let $i = $("<input>")
-    $i.attr({"type":tipo,"id":id,"name":id,"placeholder":ph,"value":valor,"maxlength":max,"required":req,"title":gpo}).addClass(clase)
+    $i.attr({"type":tipo,"id":id,"name":id,"placeholder":ph,"value":valor,"maxlength":max,"required":req,"data":gpo}).addClass(clase)
     $i.val(valor)
     return $i
 }

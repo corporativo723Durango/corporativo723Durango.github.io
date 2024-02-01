@@ -11,6 +11,9 @@ function ajusteAle(obj){
                                     $("#cp").keyup(e=>{  let cp = parseInt($("#cp").val())
                                     if(cp >= 34000)  $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {$("#col").html("");data.forEach(e=>{ $("#colonia").append($("<option>").val(e).html(e))})});
                                     else $("#colonia").html("")})
+                                    
+
+                                    
                                 ele = $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,zip",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showCancel:true,statusBarWidth:100,dragdropWidth:800,cliente:obj.$c[0],uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi",onSelect: function(files){console.log( $(files))},onSubmit: function(obj,xhr){  console.log(obj,xhr)  }})        
                                 evi =$("#upload-evidencias").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,mp4,avi,flv",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showDelete:true,statusBarWidth:100,uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi"})                               
                         },
@@ -43,14 +46,42 @@ function onApiLoad(url){
 
 
 
-
-
 function popInfo(e){  
-    fetch(`alamierda?id=${e.currentTarget.id}`)
-    .then((response) => response.json())
-    .then((json) => {
-      
-         $("#popUp").html($("<div>").addClass("popInfo").html(json).css({"top":e.pageY+"px","left":e.pageX+"px"}))
-         $("#popUp").removeClass("ocultar")
-        })
+
+    v = textos("nuevoCli")[e.currentTarget.id]
+         $("#popUp").html($("<div>").addClass("popInfo").html(v).css({"top":e.pageY+"px","left":e.pageX+"px"}))
+         $("#popUp").removeClass("ocultar")      
+}
+https://pixlr.com/es/remove-background/
+document.getElementById("fecha_nac").onchange(function(n){          
+    console.log(n)
+    let d = new Date();
+    let r = d.getTime()-n.getTime()
+   return  (r/(1000*60*60*24))/365.25
+   document.getElementById("fecha_nac").valueAsDate = d;
+})
+
+
+
+function textos(e){
+    
+    return  {
+      nuevoCli:{
+              nombre:"Nombre o nombres tal como aparece en su identificacion",
+              paterno:"Apellido materno tal como aparece en su identificacion",
+              materno:"Nombre o nombres tal como aparece en su identificacion",
+              telefono:"Número telefónico del cliente a 10 digitos",
+              ocr:`<div id='grupoElec'> <img src='../images/nuevoCliente/ocr1.jpg' /><img src='../images/nuevoCliente/ocr2.jpg'/></div>`,
+              calle:"Nombre de la calle, Av. Blvd, Privada, Circuito, Carretera etc",
+              num_ext:"Número exterior de la vivienda",
+              num_int:"Numero interior del condominio, edificio, etc. en caso de tener. OPCIONAL",
+              cp:"Código Postal, al teclar las 5 cifras se cargaran las colonias que pertenecen a este CP en la siguiente lista",
+              antiguedad:"Antigüedad en años de la vivienda",
+              ubi:"Ubicación de la vivienda en coordenadas geograficas decimales separadas por una coma. ej. 22.3651,-102.3654",
+              observaciones:"Coloque una nota breve pero descriptiva acerca del comportamiento crediticio del cliente",
+              placeholder:{a1_a1_h3:"Datos Personales",a2_a2_h3:"Domicilio", a3_a3_h3:"Evidencias Fotográfias",
+                      nombre:"Nombre",paterno:"Apellido Paterno",materno:"Apellido Materno"
+              }
+          }            
+      }[e]  
 }

@@ -12,13 +12,13 @@ function _sec(_i){
                                 i2:$("<div>").addClass("title new"),
                                 i3:$("<img>").attr({"src":"/images/new4.png"}).addClass("character"),
                                 $_dat:{id:"nuevoCli",t:"Nuevo Cliente",$c:$nuevoCli[0].children[0],w:"90%",h:"80%",btn:"Guardar"}
-                                //$_dat:[$nuevoCli,`<h2>Nuevo Cliente</h2>`,"65%","60%"]
+                                
                                 },
                                 {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/actualizar.png"}).addClass("cover-image")),
                                 i2:$("<div>").addClass("title upd"),
                                 i3:$("<img>").attr({"src":"/images/act1.png"}).addClass("character"),
                                 $_dat:{id:"actualizaCli",t:"Actualizar Clientes",$c:$mapa[0],w:"50%",h:"20%",btn:"Salir"}
-                                //$_dat:[$mapa,"<h2>Ubicar domicilio</h2>","50%","50%"]
+                       
                                 },
                                 {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/consultar.png"}).addClass("cover-image")),
                                 i2:$("<div>").addClass("title selec"),
