@@ -30,7 +30,7 @@
 
 .alertify .ajs-dialog
 {position:relative;
-    margin:5% auto;  
+    margin:1% auto;
     max-width:75%;
     padding:20px 24px 0 24px;
     outline:0;
@@ -100,10 +100,10 @@
 }
 
 .alertify .ajs-footer
-{padding:4px;
+{
     margin-left:-24px;
     margin-right:-24px;
-    min-height:43px;
+
     background-color:#fff
 }
 
@@ -111,9 +111,6 @@
 {text-align:right
 }
 
-.alertify .ajs-footer .ajs-buttons.ajs-primary .ajs-button
-{margin:4px
-}
 
 .alertify .ajs-footer .ajs-buttons.ajs-auxiliary
 {float:left;
@@ -122,12 +119,14 @@
 }
 
 .alertify .ajs-footer .ajs-buttons.ajs-auxiliary .ajs-button
-{margin:4px
+{
+    margin:4px
 }
 
 .alertify .ajs-footer .ajs-buttons .ajs-button
-{min-width:88px;
-    min-height:35px
+{
+    min-width:88px;
+    min-height:27px
 }
 
 .alertify .ajs-handle
@@ -212,7 +211,7 @@
     left:0;
     right:0;
     margin:0;
-    padding:16px 24px
+    padding:10px 24px
 }
 
 .alertify.ajs-maximized .ajs-body,.alertify.ajs-resizable .ajs-body
@@ -349,8 +348,7 @@
 .alertify:not(.ajs-maximized).ajs-resizable .ajs-dialog
 {min-width:initial;
     min-width:auto}}@-moz-document url-prefix()
-{.alertify button:focus
-{outline:1px dotted #3593d2}
+{
 }
 
 .alertify .ajs-dimmer,.alertify .ajs-modal

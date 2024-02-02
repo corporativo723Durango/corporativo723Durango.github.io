@@ -23,11 +23,9 @@ $(function(){
            .append($("<div>").addClass("login").html($("<input>").attr({"id":"usuario","type":"text","placeholder":"Usuario","required":"true"})))
             .append($("<div>").addClass("login").html($("<input>").attr({"id":"contra","type":"password","placeholder":"Contraseña","required":"true"})))
           )
-<<<<<<< HEAD
+
          alertify.confirm().set({title:"Inicio de Sesión",selector:'input[type="text"]',resizable:true,frameless:false,onok:function(cE){onAutenticar($("#usuario").val(),hex_md5($("#contra").val()),"form")},oncancel:function(){alertify.error("Cancelado");location.reload()}}).setContent($log[0]).resizeTo("50%",240).show()
-=======
-         alertify.confirm().set({title:"Inicio de Sesión",selector:'input[type="text"]',resizable:true,frameless:false,onok:function(cE){onAutenticar($("#usuario").val(),hex_md5($("#contra").val()),"form"); return true;},oncancel:function(){alertify.error("Cancelado");location.reload()}}).setContent($log[0]).resizeTo("50%",240).show()
->>>>>>> 8df871c (asssda)
+       
          $(".ajs-dialog").addClass("fondoForms p35")
     }else{     
       s=JSON.parse(sesion) 

@@ -6,12 +6,12 @@
     let $fs2 = $("<fielset>").addClass("_domicilio").html("<h3>Domicilio</h3><br>")
     let $fs3 = $("<fielset>").addClass("fotos").html("<h3>Evidencias Fotograficas</h3><br>")
     
-    $fs1.append(_inp("text","nombre","enlinea imp w200","Nombre",true,"Emmanuel",64,gpo="personales")).append(_inp("text","paterno","enlinea imp w200","Apellido Paterno",true,"",64,gpo="personales"))
-    .append(_inp("text","materno","enlinea imp w200","Apelllido Materno",true,"García",64,gpo="personales")).append($("<div>").addClass("grupo").append($("<label>").html("Fecha de Nacimiento: ")).append(_inp("date","fecha_nac","enlinea w150","Fecha de Nacimiento",true,"{{formatDate invoice.date 'DD-MM-YYYY'}}",32,gpo="personales").attr({"max":"2006-01-01","valuesAsDate":"2006-01-02"})))       
+    $fs1.append(_inp("text","nombre","enlinea imp w200","Nombre",true,"",64,gpo="personales")).append(_inp("text","paterno","enlinea imp w200","Apellido Paterno",true,"",64,gpo="personales"))
+    .append(_inp("text","materno","enlinea imp w200","Apelllido Materno",true,"",64,gpo="personales")).append($("<div>").addClass("grupo").append($("<label>").html("Fecha de Nacimiento: ")).append(_inp("date","fecha_nac","enlinea w150","Fecha de Nacimiento",true,"{{formatDate invoice.date 'DD-MM-YYYY'}}",32,gpo="personales").attr({"valuesAsDate":new Date()})))       
     .append($("<div>").addClass("grupo").append($("<label>").html("Lugar de Nacimiento: ")).append(_selec("entidad","ent",edos,10,gpo="personales"))).append(_inp("text","telefono","enlinea w100","Num. Teléfono",true,"618",10,gpo="personales"))
-    .append(_inp("text","ocr","enlinea w150","OCR de elector",true,"452569874525125",13,gpo="personales")).append(_div("fileuploader","subirCredencial enlinea","Arrastre  y suelte la imagen de la credencial")).append(_div("btnLimpiar","btn","Limpiar Formulario").click(function(){ limpiar()}))
+    .append(_inp("text","ocr","enlinea w150","OCR de elector",true,"",13,gpo="personales")).append(_div("fileuploader","subirCredencial enlinea","Arrastre  y suelte la imagen de la credencial")).append(_div("btnLimpiar","btn","Limpiar Formulario").click(function(){ limpiar()}))
     
-    $fs2.append(_inp("text","calle","enlinea w300","Calle, Avenida, Carretera, etc",true,"Av Santoral")).append(_inp("number","num_ext","enlinea  w100","Num ext",true,"206",5))
+    $fs2.append(_inp("text","calle","enlinea w300","Calle, Avenida, Carretera, etc",true,"")).append(_inp("number","num_ext","enlinea  w100","Num ext",true,"",5))
     .append(_inp("text","num_int","enlinea  w100","Num int",false,"1",10)).append(_inp("text","cp","enlinea w100","Código Postal",true,"",5))
     .append(_selec("colonia","enlinea w150",["Colonia"],1,"domicilio")).append($("<div>").addClass("grupo").append($("<label>").html("Propiedad: ")).append(_selec("propiedad","enlinea w100 ent",prop)))
     .append(_inp("number","antiguedad","enlinea w100","Antigüedad",true,5)).append($("<div>").addClass("grupo").append($("<label>").html("Ubicación: ")).append(_inp("text","ubi","enlinea w200","Latitud , Longitud",false,"22.3651,-102.325")).append($("<span>").addClass("material-symbols-outlined simbolMap").html("home_pin")))
@@ -37,11 +37,42 @@ let $info = _div("infowindow-content").html($("<span>").attr("id","place-name").
 $mapa.html($dir).append(_div("map")).append($info)
 
 
+/*****************   C O N S U L T A S       *******************************/
+
 let $consultar = _div("muestraCli","ventanaMain")
 let $buscador = _div("buscador","login","Buscar: ").append(_inp("text","inpBuscar","enlinea","Escriba algo referente al cliente",false,"",128,"Buscar")).append(_div("btnBuscar","btn","Buscar"))
-$consultar.html($buscador)
+let $tabla = $("<table>").attr("id","myTable").addClass("display").css("width","100%")
+$tabla.html($("<thead>").append(_th(" ,Nombre,OCR,Fecha de registo,Verificado")))
+$tabla.append($("<tfoot>").append(_th(" ,Nombre,OCR,Fecha de registo,Verificado")))
+$consultar.html($buscador).append($tabla)
 
 
+
+/*
+
+ "id": "57",
+      "name": "Donna Snider",
+      "position": "Customer Support",
+      "salary": "$112,000",
+      "start_date": "2011/01/25",
+      "office": "New York",
+      "extn": "4226"
+
+<tfoot>
+<tr>
+<th>Nombre</th>
+<th>Apellidos</th>
+<th>Email</th>
+<th>Genero</th>
+<th>Pais</th>
+<th>Creado</th>
+<th>Estado</th>
+</tr>
+</tfoot>
+</table>
+
+
+*/
 
 
 function valida(){
@@ -50,11 +81,13 @@ function valida(){
     let _datos_ = Object.create(_dat)
     let aElem = Array.from(i)
     let v = ["entidad","num_ext","antiguedad","calificacion","propiedad"]
+   
     aElem.forEach(e=>{ 
+        console.log(e.name)
         let valor = v.includes(e.id)  ? parseInt(e.value):e.value
-         if(e.title=="")  
+         if(e.name=="")  
             _datos_[e.id]=valor;
-        else if(e.title=="personales")
+        else if(e.name=="personales")
                 _datos_.personales[e.id]=valor
             else 
                 _datos_.domicilio[e.id]=valor
@@ -88,7 +121,11 @@ function limpiar(){
     $("input[type=text],input[type=number]").val("")
 }
 
-
+function subirImagenes(){
+    
+    $ele.startUpload()
+    $evi.startUpload()
+}
 
 
 
@@ -101,7 +138,7 @@ function _div(id="",clase="",html=""){
 }
 function _inp(tipo,id="",clase="",ph="",req=false,valor="",max=-1,gpo="domicilio"){
     let $i = $("<input>")
-    $i.attr({"type":tipo,"id":id,"name":id,"placeholder":ph,"value":valor,"maxlength":max,"required":req,"data":gpo}).addClass(clase)
+    $i.attr({"type":tipo,"id":id,"name":gpo,"placeholder":ph,"value":valor,"maxlength":max,"required":req,"data":gpo}).addClass(clase)
     $i.val(valor)
     return $i
 }
@@ -110,4 +147,10 @@ function _selec(id,clase,opc,sel=1,gpo="domicilio"){
     $s.attr({"id":id,"title":gpo}).addClass(clase).html("")
     opc.forEach((e,i,a) => {  $s.append($("<option>").val(i+1).html(e).attr(i+1==sel ? {"selected":true}:{"selected":false})) })
     return $s
+}
+
+function _th(a){
+    let $tr=$("<tr>")
+    a.split(",").forEach(e=>{ $tr.append($("<th>").html(e)) })
+     return $tr
 }

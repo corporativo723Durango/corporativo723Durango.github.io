@@ -2,16 +2,14 @@ var d=null
 let conte=$("<div><div><div><div><div></div>")
 conte.addClass("consulCli")
 $(".consulCLi").html("Texto de prueba nomas para llenar esta madre sin tanto esfuerxzo, checaquen mi codigo <BR>")
-
 function _sec(_i){
     let $divTot = $("<div>");
-      
             switch(parseInt(_i)){
                 case 0: $divTot.html("Inicio"); break;
                 case 1:  let opc=[{i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/newuser.jpg"}).addClass("cover-image")),
                                 i2:$("<div>").addClass("title new"),
                                 i3:$("<img>").attr({"src":"/images/new4.png"}).addClass("character"),
-                                $_dat:{id:"nuevoCli",t:"Nuevo Cliente",$c:$nuevoCli[0].children[0],w:"90%",h:"80%",btn:"Guardar"}
+                                $_dat:{id:"nuevoCli",t:"<h2>Nuevo Cliente</2>",$c:$nuevoCli[0].children[0],w:"90%",h:"80%",btn:"Guardar"}
                                 
                                 },
                                 {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/actualizar.png"}).addClass("cover-image")),
@@ -24,7 +22,6 @@ function _sec(_i){
                                 i2:$("<div>").addClass("title selec"),
                                 i3:$("<img>").attr({"src":"/images/informe.png"}).addClass("character"),
                                 $_dat:{id:"muestraCli",t:"Consultar Clientes",$c:$consultar[0],w:"70%",h:"60%",btn:"Salir"}
-                                
                                 }
                                 ];
                         opc.forEach(o=>{   
@@ -33,13 +30,8 @@ function _sec(_i){
                         break;
                 default: break;       
             } 
-          
     return $divTot;
 }
-
-
-
-
 
 function alertas($d){
     console.log($d.$c)
@@ -50,10 +42,9 @@ function alertas($d){
                 : alertify.alert().close() 
                 return false;  
                 },
-
             }).resizeTo($d.w,$d.h).show()
-    ajusteAle($d)()  
-    
+  ajusteAle($d)()  
+   
 }
 
 

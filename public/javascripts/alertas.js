@@ -1,3 +1,5 @@
+let $ele,$evi;
+
 function ajusteAle(obj){
         return {
                 "nuevoCli":function(){
@@ -12,11 +14,28 @@ function ajusteAle(obj){
                                     if(cp >= 34000)  $.getJSON(`/coloniasCP?cp=${cp}`, function(data) {$("#col").html("");data.forEach(e=>{ $("#colonia").append($("<option>").val(e).html(e))})});
                                     else $("#colonia").html("")})
                                     
-
                                     
-                                ele = $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,zip",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showCancel:true,statusBarWidth:100,dragdropWidth:800,cliente:obj.$c[0],uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi",onSelect: function(files){console.log( $(files))},onSubmit: function(obj,xhr){  console.log(obj,xhr)  }})        
-                                evi =$("#upload-evidencias").uploadFile({url:"/uploadFile",fileName:"misFiles",allowedTypes:"png,jpg,jpeg,bmp,mp4,avi,flv",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showDelete:true,statusBarWidth:100,uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi"})                               
-                        },
+                                    $("#fecha_nac")[0].onchange = function(x){          
+                                        n = x.target.valueAsDate
+                                        let d = new Date();
+                                        let r = d.getTime()-n.getTime()                                        
+                                        let a = (r/(1000*60*60*24))/365.25
+                                        if (a < 18.0){
+                                            alertify.error(`Al nacer el ${x.target.value}, esta persona no es mayor de edad ` )
+                                           document.getElementById("fecha_nac").valueAsDate = new Date("") ;
+                                        }
+                                    }
+  
+                                $ele = $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles",dragDropStr:"<div id='_p' class='fondoDrag'></div>",allowedTypes:"png,jpg,jpeg,bmp,zip",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showCancel:true,statusBarWidth:100,dragdropWidth:800,cliente:obj.$c[0],uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropComprobante",
+                                    onSelect: function(files){$(".dragDropComprobante").append($("._datPerso>.ajax-file-upload-container"))},
+                                    onSubmit: function(obj,xhr){  console.log(obj)  }} )        
+                                
+                                $evi =$("#upload-evidencias").uploadFile({url:"/uploadFile",fileName:"misFiles",dragDropStr:"<div id='_d' class='fondoDrag'></div>",allowedTypes:"png,jpg,jpeg,bmp,mp4,avi,flv",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showDelete:true,statusBarWidth:100,uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi",
+                                    onSelect: function(files){$(".dragDropEvi").append($(".fotos>.ajax-file-upload-container"))},
+                                    onSubmit: function(obj,xhr){  console.log(obj)  }})                               
+                               
+                       
+                            },
                     "login":function(){
                              
                         },
@@ -26,9 +45,23 @@ function ajusteAle(obj){
                     },
                     "muestraCli":function(){
                         $("#btnBuscar").on({click:function(){ 
+                            onApiLoad("./javascripts/tablas.js")
+                           
+
+
+
+/*
                             $.get(`/cliente/buscar/${$("#inpBuscar").val()}`).done(cli=>{
-                                 $("#muestraCli").append($("<div>").html(JSON.stringify(cli.datos)))
-                            })
+                                console.log(cli.datos)
+                                if(!cli.estatus){$("#muestraCli").append(cli.mensaje); return false;}
+                                $("#muestraCli").append($("<div>").attr("id","ren"))
+                                cli.datos.forEach(e=>{
+                                    console.log(e)
+                                    $("#muestraCli").append($(`<div>`).html(JSON.stringify(e)).addClass("enlinea"))  
+                                   })                                
+                            })*/
+
+
                         }})
 
 
@@ -52,14 +85,8 @@ function popInfo(e){
          $("#popUp").html($("<div>").addClass("popInfo").html(v).css({"top":e.pageY+"px","left":e.pageX+"px"}))
          $("#popUp").removeClass("ocultar")      
 }
-https://pixlr.com/es/remove-background/
-document.getElementById("fecha_nac").onchange(function(n){          
-    console.log(n)
-    let d = new Date();
-    let r = d.getTime()-n.getTime()
-   return  (r/(1000*60*60*24))/365.25
-   document.getElementById("fecha_nac").valueAsDate = d;
-})
+
+
 
 
 

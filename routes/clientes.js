@@ -7,6 +7,20 @@ let client=null
 /*  SistemaControlClientes       phNFEFlBguEoMdqb   */
 
 
+router.get("/consultar",async function(req,res,next){
+      try{
+            client = await mongoClient.connect(process.env.URL_DB723)
+            var _db = client.db("db723")
+            var col = _db.collection("clientes")
+            var r = await col.find({});            
+            res.send({estatus:true,data:r});
+        }catch(err){
+            res.send({estatus:true,data:err});
+        }
+      
+})
+
+
 router.post('/newID',async function(req, res, next) {
       res.setHeader()
         try{

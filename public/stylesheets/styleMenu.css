@@ -48,8 +48,7 @@ fieldset{
     font-family: 'Century Gothic';
 }
 .alertify .ajs-header,.ajs-body, .alertify .ajs-footer{
-    border:none;
-    background: transparent;
+    background: rgba(10,10,10,0.1);
 }
 .ajs-body{
     text-align: center;
