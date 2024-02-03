@@ -21,7 +21,7 @@ function _sec(_i){
                                 {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/consultar.png"}).addClass("cover-image")),
                                 i2:$("<div>").addClass("title selec"),
                                 i3:$("<img>").attr({"src":"/images/informe.png"}).addClass("character"),
-                                $_dat:{id:"muestraCli",t:"Consultar Clientes",$c:$consultar[0],w:"70%",h:"60%",btn:"Salir"}
+                                $_dat:{id:"muestraCli",t:"Consultar Clientes",$c:$consultar[0],w:"90%",h:"90%",btn:"Salir"}
                                 }
                                 ];
                         opc.forEach(o=>{   

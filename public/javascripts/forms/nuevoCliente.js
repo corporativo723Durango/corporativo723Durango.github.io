@@ -40,39 +40,14 @@ $mapa.html($dir).append(_div("map")).append($info)
 /*****************   C O N S U L T A S       *******************************/
 
 let $consultar = _div("muestraCli","ventanaMain")
-let $buscador = _div("buscador","login","Buscar: ").append(_inp("text","inpBuscar","enlinea","Escriba algo referente al cliente",false,"",128,"Buscar")).append(_div("btnBuscar","btn","Buscar"))
-let $tabla = $("<table>").attr("id","myTable").addClass("display").css("width","100%")
+let $tabla = $("<table>").attr("id","listClientes").addClass("display").css("width","100%")
 $tabla.html($("<thead>").append(_th(" ,Nombre,OCR,Fecha de registo,Verificado")))
 $tabla.append($("<tfoot>").append(_th(" ,Nombre,OCR,Fecha de registo,Verificado")))
-$consultar.html($buscador).append($tabla)
+$consultar.html($tabla)
 
 
 
-/*
 
- "id": "57",
-      "name": "Donna Snider",
-      "position": "Customer Support",
-      "salary": "$112,000",
-      "start_date": "2011/01/25",
-      "office": "New York",
-      "extn": "4226"
-
-<tfoot>
-<tr>
-<th>Nombre</th>
-<th>Apellidos</th>
-<th>Email</th>
-<th>Genero</th>
-<th>Pais</th>
-<th>Creado</th>
-<th>Estado</th>
-</tr>
-</tfoot>
-</table>
-
-
-*/
 
 
 function valida(){

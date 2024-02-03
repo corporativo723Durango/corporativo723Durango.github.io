@@ -8,14 +8,25 @@ let client=null
 
 
 router.get("/consultar",async function(req,res,next){
+      console.log(req.query)   
+
       try{
             client = await mongoClient.connect(process.env.URL_DB723)
             var _db = client.db("db723")
             var col = _db.collection("clientes")
-            var r = await col.find({});            
+            var r = await col.aggregate([
+                  {
+                    '$set': {
+                      'ocr': '$personales.ocr'
+                    }
+                  }
+                ]).toArray()
+            
+            
+            console.log(r)
             res.send({estatus:true,data:r});
-        }catch(err){
-            res.send({estatus:true,data:err});
+        }catch{
+            res.send(msgError)
         }
       
 })

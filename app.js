@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var colCPRouter = require('./routes/coloniasCP');
 var upload = require("./routes/uploadFile");
-var cliente = require("./routes/clientes");
+var clientes = require("./routes/clientes");
 
 
 
@@ -37,7 +37,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/coloniasCP',colCPRouter);
 app.use("/uploadFile",upload);
-app.use("/cliente",cliente);
+app.use("/clientes",clientes);
 
 
 

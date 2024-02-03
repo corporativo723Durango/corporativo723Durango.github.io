@@ -44,27 +44,19 @@ function ajusteAle(obj){
 
                     },
                     "muestraCli":function(){
-                        $("#btnBuscar").on({click:function(){ 
-                            onApiLoad("./javascripts/tablas.js")
+                        let _dT;
+                        let s = JSON.parse(localStorage.getItem("sesion"))
+                        if(s._daTa == undefined){
+                            onApiLoad("./javascripts/tablas.js")                            
+                            _dT = initDataTable("#listClientes")
+                            s["_daTa"] = _dT
+                            localStorage.setItem("sesion",JSON.stringify(s))
+                         }else{
+                            s._daTa.destroy()
+                            _dT = initDataTable("#listClientes")
+                         }
+                         console.log(_dT)
                            
-
-
-
-/*
-                            $.get(`/cliente/buscar/${$("#inpBuscar").val()}`).done(cli=>{
-                                console.log(cli.datos)
-                                if(!cli.estatus){$("#muestraCli").append(cli.mensaje); return false;}
-                                $("#muestraCli").append($("<div>").attr("id","ren"))
-                                cli.datos.forEach(e=>{
-                                    console.log(e)
-                                    $("#muestraCli").append($(`<div>`).html(JSON.stringify(e)).addClass("enlinea"))  
-                                   })                                
-                            })*/
-
-
-                        }})
-
-
                     }
              }[obj.id]
         }
@@ -75,12 +67,7 @@ function onApiLoad(url){
 }
 
 
-
-
-
-
 function popInfo(e){  
-
     v = textos("nuevoCli")[e.currentTarget.id]
          $("#popUp").html($("<div>").addClass("popInfo").html(v).css({"top":e.pageY+"px","left":e.pageX+"px"}))
          $("#popUp").removeClass("ocultar")      

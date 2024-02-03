@@ -1,4 +1,15 @@
 $(document).ready(function(){
+    console.log("Comienza construccion de DataTable")
+})
+
+
+function orden(o){               
+        let k = Object.keys(o)
+        let l="";
+        k.forEach(_k =>{ l += `<ddt><b>${_k}:</b> </ddt><ddd>${o[_k]}</ddd><br>`})
+        return l
+    }
+
     function format(d) {
         // `d` is the original data object for the row
         return (
@@ -11,21 +22,31 @@ $(document).ready(function(){
             '<dl>' +
             '<dt>Domicilio Cliente</dt>' +
             '<dd>' +
-            orden(d.calificacion)+
+            orden(d.domicilio)+
             '</dd>' +
             '</dl>'+
             '<dl>'+
-            '<dt>Domicilio </dt>' +
+            '<dt>Domicilio Referencia </dt>' +
             '<dd>'+
-            orden(d.calificacion)+
+            orden(d.domicilio)+
             '</dd>' +
             '</dl>'
         
         );
     }
      
-    let table = new DataTable('#myTable', {
-        ajax: '/cliente/consultar',
+ function initDataTable(_id_){
+    let table = new DataTable(_id_, {
+        paging: false,
+        scrollCollapse: true,
+        scrollY: '60vh',
+        columnDefs: [
+            {
+                targets: 3,
+                render: DataTable.render.datetime('d MMM yyyy')
+            }
+        ],
+        ajax: '/clientes/consultar',
         columns: [
             {
                 className: 'dt-control',
@@ -65,16 +86,19 @@ $(document).ready(function(){
         }
     });
 
+    table.on('click', 'tbody tr.odd, tbody tr.even', (e) => {
+        console.log(e.currentTarget)
+        let classList = e.currentTarget.classList;
+     
+        if (classList.contains('selected')) {
+            classList.remove('selected');
+        }
+        else {
+            table.rows('.selected').nodes().each((row) => row.classList.remove('selected'));
+            classList.add('selected');
+        }
+    });
 
 
-
-})
-
-
-function orden(o){
-    let k = Object.keys(o)
-    let l="";
-    k.forEach(_k =>{ l += `<ddt><b>${_k}:</b> </ddt><ddd>${o[_k]}</ddd><br>`})
-    console.log(l)
-    return l
+    return table
 }
