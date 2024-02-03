@@ -46,7 +46,7 @@ function ajusteAle(obj){
                     "muestraCli":function(){                        
                         let s = JSON.parse(localStorage.getItem("sesion"))
                         if(s._daTa == undefined){
-                            onApiLoad("./dataTable/tablas.js")
+                           
                             s["_daTa"] = initDataTable("#listClientes")
                             localStorage.setItem("sesion",JSON.stringify(s))
                          }
