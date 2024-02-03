@@ -43,20 +43,18 @@ function ajusteAle(obj){
 
 
                     },
-                    "muestraCli":function(){
-                        let _dT;
+                    "muestraCli":function(){                        
                         let s = JSON.parse(localStorage.getItem("sesion"))
                         if(s._daTa == undefined){
-                            onApiLoad("./javascripts/tablas.js")                            
-                            _dT = initDataTable("#listClientes")
-                            s["_daTa"] = _dT
+                            onApiLoad("./dataTable/tablas.js")
+                            s["_daTa"] = initDataTable("#listClientes")
                             localStorage.setItem("sesion",JSON.stringify(s))
-                         }else{
-                            s._daTa.destroy()
-                            _dT = initDataTable("#listClientes")
                          }
-                         console.log(_dT)
-                           
+                         
+                         $("#refresh_dT").click(function(){
+                            s._daTa = initDataTable("#listClientes")    
+                         })
+
                     }
              }[obj.id]
         }

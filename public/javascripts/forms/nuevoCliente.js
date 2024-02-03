@@ -40,10 +40,11 @@ $mapa.html($dir).append(_div("map")).append($info)
 /*****************   C O N S U L T A S       *******************************/
 
 let $consultar = _div("muestraCli","ventanaMain")
+let $btn_dT = _div("refresh_dT","btn","Actualizar")
 let $tabla = $("<table>").attr("id","listClientes").addClass("display").css("width","100%")
 $tabla.html($("<thead>").append(_th(" ,Nombre,OCR,Fecha de registo,Verificado")))
 $tabla.append($("<tfoot>").append(_th(" ,Nombre,OCR,Fecha de registo,Verificado")))
-$consultar.html($tabla)
+$consultar.html($btn_dT).append($tabla)
 
 
 
