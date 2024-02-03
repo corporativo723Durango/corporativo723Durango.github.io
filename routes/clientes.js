@@ -17,7 +17,12 @@ router.get("/consultar",async function(req,res,next){
             var r = await col.aggregate([
                   {
                     '$set': {
-                      'ocr': '$personales.ocr'
+                      'ocr': '$personales.ocr',
+                      'nom': {
+                        '$concat': [
+                          '$personales.nombre', ' ', '$personales.paterno', ' ', '$personales.materno'
+                        ]
+                      }
                     }
                   }
                 ]).toArray()
@@ -32,18 +37,21 @@ router.get("/consultar",async function(req,res,next){
 })
 
 
-router.post('/newID',async function(req, res, next) {
-      res.setHeader()
+router.get('/newID',async function(req, res, next) {
         try{
             client = await mongoClient.connect(process.env.URL_DB723)
             var _db = client.db("db723")
             var col = _db.collection("clientes")
-            var r = await col.countDocuments()+1
-            res.send({estatus:true,datos:r});
+            let i = await col.aggregate([{'$sort': {'_id': -1}},{'$limit': 1},{'$project':{'_id':1}}]).toArray()
+            console.log()
+            res.send({estatus:true,datos:i[0]._id});
         }catch(err){
             res.send({estatus:true,datos:err});
         }
 });
+
+
+
 
 router.post('/nuevo', async function(req, res, next){
       let _data = req.body
@@ -53,7 +61,9 @@ router.post('/nuevo', async function(req, res, next){
             client = await mongoClient.connect(process.env.URL_DB723)
             var _db = client.db("db723")
             var col = _db.collection("clientes")
-            _data['_id'] = await col.countDocuments()+1
+            let i = await col.aggregate([{'$sort': {'_id': -1}},{'$limit': 1},{'$project':{'_id':1}}]).toArray()
+            console.log(i)
+            _data['_id'] = i[0]._id + 1
             let r = await col.insertOne(_data)
             res.send({estatus:true,mensaje:"Cliente agregado satisfactoriamente"})
       }catch(errMsg){

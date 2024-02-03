@@ -35,15 +35,16 @@ function orden(o){
         );
     }
      
- function initDataTable(_id_){
+ function initDataTable(_id_,_r){
     let table = new DataTable(_id_, {
+        destroy :  _r,
         paging: false,
         scrollCollapse: true,
         scrollY: '60vh',
         columnDefs: [
             {
                 targets: 3,
-                render: DataTable.render.datetime('d MMM yyyy')
+                render: DataTable.render.datetime('dd MM yyyy')
             }
         ],
         ajax: '/clientes/consultar',

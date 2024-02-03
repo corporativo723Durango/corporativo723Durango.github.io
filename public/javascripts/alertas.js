@@ -47,12 +47,14 @@ function ajusteAle(obj){
                         let s = JSON.parse(localStorage.getItem("sesion"))
                         if(s._daTa == undefined){
                            
-                            s["_daTa"] = initDataTable("#listClientes")
+                            s["_daTa"] = initDataTable("#listClientes",false)
                             localStorage.setItem("sesion",JSON.stringify(s))
                          }
                          
                          $("#refresh_dT").click(function(){
-                            s._daTa = initDataTable("#listClientes")    
+                            s._daTa = null
+                            s._daTa = initDataTable("#listClientes",true) 
+                            localStorage.setItem("sesion",JSON.stringify(s)) 
                          })
 
                     }

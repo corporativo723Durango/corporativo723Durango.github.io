@@ -17,7 +17,7 @@
     .append(_inp("number","antiguedad","enlinea w100","Antigüedad",true,5)).append($("<div>").addClass("grupo").append($("<label>").html("Ubicación: ")).append(_inp("text","ubi","enlinea w200","Latitud , Longitud",false,"22.3651,-102.325")).append($("<span>").addClass("material-symbols-outlined simbolMap").html("home_pin")))
     .append(_div("mapaUbi","mapaUbi","Mapa para ubicar").toggle())
     
-    $fs3.append($("<textarea>").attr({"value":"ESTE TEXTO ES DE EJEMPLO",  "id":"observaciones","placeholder":"Observaciones","maxlength":"250"})).append(_div("upload-evidencias","upload","Subir Evidencias"))
+    $fs3.append($("<textarea>").attr({"value":"ESTE TEXTO ES DE EJEMPLO",  "id":"observaciones","placeholder":"Observaciones","maxlength":"256"})).append(_div("upload-evidencias","upload","Subir Evidencias"))
     let $tmp = _div("tab-contaier","tab-contaier","")
    
 
@@ -42,8 +42,8 @@ $mapa.html($dir).append(_div("map")).append($info)
 let $consultar = _div("muestraCli","ventanaMain")
 let $btn_dT = _div("refresh_dT","btn","Actualizar")
 let $tabla = $("<table>").attr("id","listClientes").addClass("display").css("width","100%")
-$tabla.html($("<thead>").append(_th(" ,Nombre,OCR,Fecha de registo,Verificado")))
-$tabla.append($("<tfoot>").append(_th(" ,Nombre,OCR,Fecha de registo,Verificado")))
+$tabla.html($("<thead>").append(_th(" ,Nombre,OCR,Fecha de registro,Verificado")))
+$tabla.append($("<tfoot>").append(_th(" ,Nombre,OCR,Fecha de registro,Verificado")))
 $consultar.html($btn_dT).append($tabla)
 
 
@@ -70,11 +70,11 @@ function valida(){
          })
      alertify.confirm().destroy();
      alertify.prompt().destroy();
-    let $confGuardar = alertify.prompt('Clientes','Esta acción necesita autorización','299792458', function(evt,value){ 
+    let $confGuardar = alertify.prompt('Clientes','Esta acción necesita autorización','29979245', function(evt,value){ 
         let s = JSON.parse(localStorage.getItem("sesion"))
         let u = JSON.parse(s.usuario)
         console.log(u.contra, value)
-        if(u.contra==hex_md5(value))  guardarCliente(_datos_)
+        if(u.contra==hex_md5(value))  guardarCliente(_datos_,u._id)
         else alertify.error('Contraseña Incorrecta'); 
     }, function(){ alertify.error('Cancelado')}).set('selector', 'input[type="password"]');
     
@@ -86,9 +86,9 @@ function valida(){
 
 }
 
-function guardarCliente(x){
-    let query =  JSON.stringify({"personales":JSON.stringify(x.personales),"domicilio":JSON.stringify(x.domicilio),"fecha_alt":Date(),"estatus":true,"verificado":false,"calificacion":100})
-    $.post("/cliente/nuevo",JSON.parse(query)).done(function(m){
+function guardarCliente(x,id_u){
+    let query =  JSON.stringify({"personales":JSON.stringify(x.personales),"domicilio":JSON.stringify(x.domicilio),"fecha_alt":Date(),"estatus":true,"verificado":false,"calificacion":100,"dio_alta":id_u})
+    $.post("/clientes/nuevo",JSON.parse(query)).done(function(m){
         alertify.success(m.mensaje)
     })   
 }

@@ -36,11 +36,12 @@ function _sec(_i){
 function alertas($d){
     console.log($d.$c)
     alertify.alert().setContent($d.$c).set({label:$d.btn,"title":$d.t,"resizable":true,"invokeOnCloseOff":true,
-            onok:function(closeEvent){console.log(closeEvent.button.element.innerHTML); 
+            onok:function(closeEvent){ $.get("/clientes/newID").done(function(r){                
                 closeEvent.button.element.innerHTML == "Guardar" ? 
-                alertify.confirm("El nuevo cliente se guardará con folio: XXX. ¿Esta seguro de terminar esta acción?").set({onok:(closeEvent)=>{  valida();  alertify.success("Nuevo Cliente guardado");alertify.alert().close()}}) 
+                alertify.confirm(`El nuevo cliente se guardará con ID: ${r.datos}. ¿Esta seguro de terminar esta acción?`).set({onok:(closeEvent)=>{  valida();  alertify.success("Nuevo Cliente guardado");alertify.alert().close()},resizable:true}).resizeTo("60%","30%") 
                 : alertify.alert().close() 
-                return false;  
+                return false; 
+                 })  
                 },
             }).resizeTo($d.w,$d.h).show()
   ajusteAle($d)()  
