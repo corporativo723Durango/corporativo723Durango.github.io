@@ -573,5 +573,51 @@ border:1px solid blue;
   color:black;
   background:white;
   border:1px solid black;
-  
+}
+
+
+
+
+#fotosCli{
+  position:absolute;
+  top:0;left:0;bottom:0;right:0;
+  background: rgba(0,0,0,0.5);
+}
+
+.listaF{
+  position: absolute;
+  top:calc(50% - 70px );
+  left:calc(50% - 94px );
+  width: 188px;
+  color:black;
+  background: rgba(255,255,255,0.8);
+  font-size: 12px;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 3px;
+}
+.celCk span{
+  position: relative;
+  display: inline-flex;
+  bottom: -3px;
+  margin: 1px 4px;
+  font-size: 16px;
+}
+.celCk:hover{
+  cursor:pointer;
+  color:#188f20;
+
+}
+
+.subTit{
+ transform: rotate(-90deg);
+ font-size: 10px;
+ height: 58px;
+ width: 64px;
+ font-weight: bold;
+}
+.divi{
+  background:rgb(48, 48, 51);
+  border-bottom: 1px solid rgb(129, 129, 132);
+  height: 0px;
 }
