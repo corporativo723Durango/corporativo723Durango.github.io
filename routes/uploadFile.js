@@ -8,7 +8,7 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
   let cliente = "0001"
   var form = new formidable.IncomingForm();
-  exec(`mkdir uploadFile\\${cliente}     mkdir uploadFile\\INE\\${cliente}`)
+ 
     
   form.parse(req, function (err, fields, files) {
     let a = files.misFiles
