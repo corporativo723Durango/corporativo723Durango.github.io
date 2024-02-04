@@ -33,7 +33,8 @@ function ajusteAle(obj){
                                 $evi =$("#upload-evidencias").uploadFile({url:"/uploadFile",fileName:"misFiles",dragDropStr:"<div id='_d' class='fondoDrag'></div>",allowedTypes:"png,jpg,jpeg,bmp,mp4,avi,flv",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showDelete:true,statusBarWidth:100,uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi",
                                     onSelect: function(files){$(".dragDropEvi").append($(".fotos>.ajax-file-upload-container"))},
                                     onSubmit: function(obj,xhr){  console.log(obj)  }})                               
-                               
+                                    
+                                    $(".tab-content").addClass("fondoForms")
                        
                             },
                     "login":function(){
@@ -56,6 +57,7 @@ function ajusteAle(obj){
                             s._daTa = initDataTable("#listClientes",true) 
                             localStorage.setItem("sesion",JSON.stringify(s)) 
                          })
+                         $("#muestraCli").addClass("fondoForms")
 
                     }
              }[obj.id]

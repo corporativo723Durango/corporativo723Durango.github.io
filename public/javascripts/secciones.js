@@ -10,19 +10,21 @@ function _sec(_i){
                                 i2:$("<div>").addClass("title new"),
                                 i3:$("<img>").attr({"src":"/images/new4.png"}).addClass("character"),
                                 $_dat:{id:"nuevoCli",t:"<h2>Nuevo Cliente</2>",$c:$nuevoCli[0].children[0],w:"90%",h:"80%",btn:"Guardar"}
-                                
+                                },
+                               
+                                {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/consultar.png"}).addClass("cover-image")),
+                                i2:$("<div>").addClass("title selec"),
+                                i3:$("<img>").attr({"src":"/images/informe.png"}).addClass("character"),
+                                $_dat:{id:"muestraCli",t:"Consultar Clientes",$c:$consultar[0],w:"90%",h:"90%",btn:"Salir"}
                                 },
                                 {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/actualizar.png"}).addClass("cover-image")),
                                 i2:$("<div>").addClass("title upd"),
                                 i3:$("<img>").attr({"src":"/images/act1.png"}).addClass("character"),
                                 $_dat:{id:"actualizaCli",t:"Actualizar Clientes",$c:$mapa[0],w:"50%",h:"20%",btn:"Salir"}
-                       
-                                },
-                                {i1:$("<div>").addClass("wrapper").html($("<img>").attr({"src":"/images/consultar.png"}).addClass("cover-image")),
-                                i2:$("<div>").addClass("title selec"),
-                                i3:$("<img>").attr({"src":"/images/informe.png"}).addClass("character"),
-                                $_dat:{id:"muestraCli",t:"Consultar Clientes",$c:$consultar[0],w:"90%",h:"90%",btn:"Salir"}
                                 }
+
+                               
+
                                 ];
                         opc.forEach(o=>{   
                             $divTot.append($("<div>").addClass("opcCli").html($("<div>").addClass("card").html(o.i1).append(o.i2).append(o.i3)).click(()=>{ alertas(o.$_dat)}) )
@@ -44,6 +46,7 @@ function alertas($d){
                  })  
                 },
             }).resizeTo($d.w,$d.h).show()
+           
   ajusteAle($d)()  
    
 }

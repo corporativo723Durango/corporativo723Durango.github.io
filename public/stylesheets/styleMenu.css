@@ -58,9 +58,14 @@ fieldset{
     background-repeat: no-repeat;
     background-position: center;
     position:relative;
+    background-size: contain;
+    background-origin: content-box; 
 }
+/*
 .p35{background-size:35%; min-width: 450px !important;  min-height: 200px;}
 .p45{background-size:45%; max-width: 450px;}
+.p50{    background-size: contain;
+     background-origin: content-box; }
 .p70{
     background-size: 70%;
     min-width: 50% !important;
@@ -70,7 +75,7 @@ fieldset{
     
 }
 .p90{background-size: 80%; max-width: 950px;}
-
+*/
 .usuarioLogueado{
     margin-block-start: 0.33em;
     margin-block-end: 1 em;

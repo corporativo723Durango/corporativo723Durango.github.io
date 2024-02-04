@@ -19,7 +19,7 @@
     
     $fs3.append($("<textarea>").attr({"value":"ESTE TEXTO ES DE EJEMPLO",  "id":"observaciones","placeholder":"Observaciones","maxlength":"256"})).append(_div("upload-evidencias","upload","Subir Evidencias"))
     let $tmp = _div("tab-contaier","tab-contaier","")
-   
+  
 
     Array(Array("Datos Personales",$fs1),Array("Domicilio",$fs2),Array("Evidencias Fotográficas",$fs3)).forEach((e,i,a)=>{ $tmp.append(_div(`tab${i+1}`,"tab",`<a id="a${i+1}" href="#tab${i+1}">${e[0]}</a>`).append(_div(`tc${i+1}`,"tab-content",e[1]))) })
     let  $pestañas = _div("tabs","tabs",$tmp)
@@ -40,7 +40,7 @@ $mapa.html($dir).append(_div("map")).append($info)
 /*****************   C O N S U L T A S       *******************************/
 
 let $consultar = _div("muestraCli","ventanaMain")
-let $btn_dT = _div("refresh_dT","btn","Actualizar")
+let $btn_dT = _div("refresh_dT","btn","<span class='material-icons'>update</span>").attr("title","Actualizar Lista")
 let $tabla = $("<table>").attr("id","listClientes").addClass("display").css("width","100%")
 $tabla.html($("<thead>").append(_th(" ,Nombre,OCR,Fecha de registro,Verificado")))
 $tabla.append($("<tfoot>").append(_th(" ,Nombre,OCR,Fecha de registro,Verificado")))
