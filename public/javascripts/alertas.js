@@ -27,10 +27,12 @@ function ajusteAle(obj){
                                     }
   
                                 $ele = $("#fileuploader").uploadFile({url:"/uploadFile",fileName:"misFiles",dragDropStr:"<div id='_p' class='fondoDrag'></div>",allowedTypes:"png,jpg,jpeg,bmp,zip",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showCancel:true,statusBarWidth:100,dragdropWidth:800,cliente:obj.$c[0],uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropComprobante",
-                                    onSelect: function(files){$(".dragDropComprobante").append($("._datPerso>.ajax-file-upload-container"))},
+                                    onSelect: function(files){ console.log(files)
+                                        
+                                        $(".dragDropComprobante").append($("._datPerso>.ajax-file-upload-container"))},
                                     onSubmit: function(obj,xhr){  console.log(obj)  }} )        
                                 
-                                $evi =$("#upload-evidencias").uploadFile({url:"/uploadFile",fileName:"misFiles",dragDropStr:"<div id='_d' class='fondoDrag'></div>",allowedTypes:"png,jpg,jpeg,bmp,mp4,avi,flv",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showDelete:true,statusBarWidth:100,uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi",
+                                $evi =$("#upload-evidencias").uploadFile({url:"/uploadFile",fileName:"misFiles",dragDropStr:"<div id='_d' class='fondoDrag'></div>",allowedTypes:"png,jpg,jpeg,bmp,mp4,avi,flv",showPreview:true,previewHeight:"50px",previewWidth:"auto",autoSubmit:false,showAbort:true,showDelete:true,statusBarWidth:100,cliente:obj.$c[0],uploadButtonClass:"botonSubir",dragDropContainerClass:"dragDropEvi",
                                     onSelect: function(files){$(".dragDropEvi").append($(".fotos>.ajax-file-upload-container"))},
                                     onSubmit: function(obj,xhr){  console.log(obj)  }})                               
                                     
