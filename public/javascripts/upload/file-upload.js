@@ -28,10 +28,10 @@
             // http://stackoverflow.com/questions/11832930/html-input-file-accept-attribute-file-type-csv
             acceptFiles: "*",
             fileName: "file",
-            formData: false,
+            formData: true,
             dynamicFormData:false,
             maxFileSize: -1,
-            maxFileCount: -1,
+            maxFileCount: 5,
             multiple: true,
             dragDrop: true,
             autoSubmit: true,
@@ -61,8 +61,8 @@
             deleteCallback: false,
             afterUploadAll: false,
             serialize:true,
-            sequential:false,
-            sequentialCount:2,
+            sequential:true,
+            sequentialCount:5,
             customProgressBar: false,
             abortButtonClass: "ajax-file-upload-abort",
             cancelButtonClass: "ajax-file-upload-cancel",
@@ -93,7 +93,11 @@
             extraHTML:false,
             uploadQueueOrder:'top',
             headers: {},
-            cliente:0
+            cliente:function(files,renombre){
+                    console.log(files)
+                    console.log(renombres)
+                                        
+            }
         }, options);
 
         
@@ -104,7 +108,7 @@
         this.errorLog = $("<div></div>"); //Writing errors
         this.responses = [];
         this.existingFileNames = [];
-        this.cliente=s.cliente
+        this.cliente= s.cliente
         if(!feature.formdata) //check drag drop enabled.
         {
             s.dragDrop = false;
@@ -112,7 +116,7 @@
         if(!feature.formdata || s.maxFileCount === 1) {
             s.multiple = false;
         }
-
+        
         $(this).html("");
 
         var obj = this;

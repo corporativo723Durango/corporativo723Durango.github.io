@@ -582,6 +582,7 @@ border:1px solid blue;
   position:absolute;
   top:0;left:0;bottom:0;right:0;
   background: rgba(0,0,0,0.5);
+  z-index: 9999999;
 }
 
 .listaF{
@@ -591,7 +592,7 @@ border:1px solid blue;
   width: 188px;
   color:black;
   background: rgba(255,255,255,0.8);
-  font-size: 12px;
+  font-size: 14px;
   border: 1px solid white;
   border-radius: 10px;
   padding: 3px;
@@ -620,4 +621,14 @@ border:1px solid blue;
   background:rgb(48, 48, 51);
   border-bottom: 1px solid rgb(129, 129, 132);
   height: 0px;
+}
+
+.cerrar{
+  position:absolute;
+  top:1px;
+  right: 1px;
+}
+.cerrar:hover{
+  cursor:pointer;
+  color:rgb(221, 0, 0);
 }
