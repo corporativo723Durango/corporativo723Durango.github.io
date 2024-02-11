@@ -93,11 +93,7 @@
             extraHTML:false,
             uploadQueueOrder:'top',
             headers: {},
-            cliente:function(files,renombre){
-                    console.log(files)
-                    console.log(renombres)
-                                        
-            }
+            cliente:0
         }, options);
 
         
@@ -152,7 +148,7 @@
             } else window.setTimeout(checkAjaxFormLoaded, 10);
         })();
 
-
+/************************************************************************ */
 	   this.startUpload = function () {
 	   		$("form").each(function(i,items)
 	   		{
@@ -164,8 +160,10 @@
 
             if(mainQ.length >= 1 )
 	 			submitPendingUploads();
-
         }
+
+/*************************************************************************** */
+
 
         this.getFileCount = function () {
             return obj.selectedFiles;
@@ -274,8 +272,9 @@
         var mainQ=[];
         var progressQ=[]
         var running = false;
-          function submitPendingUploads() {
-			if(running) return;
+
+    function submitPendingUploads() {
+		if(running) return;
 			running = true;
             (function checkPendingForms() {
 

@@ -6,23 +6,6 @@ require("dotenv").config()
  let client=null 
  /*  SistemaControlClientes       phNFEFlBguEoMdqb   */ 
   
-/*
- router.use(function (err, req, res, next) {
-      const ip = res.socket.remoteAddress
-      res.send(`Hello World ${ip}`);
-      next(ip);
-    })
-
-    // requests will never reach this route
-router.use('/autenticar/:usuario/:contra', function (err,req, res,next) {
-      req.set("Sec-Fetch-Mode","no-cors")
-      res.send('Welcome');
-      next()
-})
-*/
-
-
-
  router.post('/autenticar', async function(req,res){ 
        let _data = req.query
       // try{ 

@@ -11,14 +11,6 @@ var colCPRouter = require('./routes/coloniasCP');
 var upload = require("./routes/uploadFile");
 var clientes = require("./routes/clientes");
 
-
-
-
-
-
-
-
-
 var app = express();
 
 
@@ -38,6 +30,7 @@ app.use('/users', usersRouter);
 app.use('/coloniasCP',colCPRouter);
 app.use("/uploadFile",upload);
 app.use("/clientes",clientes);
+
 
 
 

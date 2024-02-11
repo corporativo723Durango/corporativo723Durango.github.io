@@ -6,33 +6,20 @@ $(document).ready(function(){
 function orden(o){               
         let k = Object.keys(o)
         let l="";
-        k.forEach(_k =>{ l += `<ddt><b>${_k}:</b> </ddt><ddd>${o[_k]}</ddd><br>`})
+        let ponFotos = function(o,_k){let $fotos =  $("<div>"); o[_k].forEach(_k_=>{ $fotos.append($("<img>").attr("src","../"+_k_).addClass("imgDetalle")) });  return $fotos.html(); }
+        k.forEach(_k =>{ l += `<ddt><b>${_k}</b> </ddt><ddd>${_k=="fotos" ? ponFotos(o,_k):o[_k]}</ddd><br>`})
         return l
     }
 
     function format(d) {
-        // `d` is the original data object for the row
-        return (
-            '<dl>' +
-            '<dt>Datos Personales</dt>' +
-            '<dd>' +
-            orden(d.personales)+
-            '</dd>' +
-            '</dl>'+
-            '<dl>' +
-            '<dt>Domicilio Cliente</dt>' +
-            '<dd>' +
-            orden(d.domicilio)+
-            '</dd>' +
-            '</dl>'+
-            '<dl>'+
-            '<dt>Domicilio Referencia </dt>' +
-            '<dd>'+
-            orden(d.domicilio)+
-            '</dd>' +
-            '</dl>'
-        
-        );
+        let $det = $("<div>")
+        let $per = $("<dl>")
+        let $dom1 = $("<dl>")        
+        $per.html($("<dt>").html("Datos Personales")).append($("<dd>").html(orden(d.personales)))
+        $dom1.html($("<dt>").html("Domicilio Cliente")).append($("<dd>").html(orden(d.domicilios[0])))
+        let $dom2 = d.domicilios.length == 1  ? "":$("<dl>").html($("<dt>").html("Domicilio Referencia")).append($("<dd>").html(orden(d.domicilios[1]))) 
+        $det.html($per).append($dom1).append($dom2)
+        return $det;
     }
      
  function initDataTable(_id_,_r){

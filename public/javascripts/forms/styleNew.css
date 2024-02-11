@@ -290,9 +290,15 @@ dd ddt{
     margin:0;
     border:none;
 }
+div#tc2 {
+  padding: 1px;
+  margin: 0px;
+ 
+}
+
 
 .enlinea{
-    margin: 5px 25px 5px 1px;
+    margin: 5px 15px 5px 1px;
     display: inline-flex;
     font-family: 'Century Gothic';
     font-size: 14px;
@@ -309,12 +315,15 @@ dd ddt{
   padding: 0px;
 }
 
+input[type=number]{
+  width: 45px;
+}
+
 .ent{
     display: inline-flex;
-    width: 140px;
-    margin-right: 20px;
+    width: 100px;
+    margin-right: 12px;
     font-family: "Century Gothic";
-
 }
 
 label{
@@ -328,10 +337,10 @@ label{
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: baseline;
-  margin: 10px 0px;
+  margin: 5px 0px;
 }
 .simbolMap{
-  font-size: 42px;
+  font-size: 32px;
   text-shadow: 1px 1px gray;
   cursor:pointer;
 }
@@ -341,10 +350,13 @@ label{
 }
 .mapaUbi{
   border:2px solid gray;
-  display: inline-flex;
+  display: flex;
   background-image: url("/images/logo_negro_1.png");
   background-size: 100%;
   background-repeat: no-repeat;
+  position:relative;
+  width: 90%;
+  height: 230px;
 }
 
 /*  PESTAÑAS  */
@@ -358,7 +370,7 @@ label{
   --tabs-border-color: #e3ebf3;
   --tabs-border-size: 3px;
   --tabs-text-color: black !important;
-  --tabs-dark-color: white;
+  --tabs-dark-color: rgba(213, 211, 211, 0.558);
   --tabs-lite-color: rgb(255, 255, 255);
   --tabs-width: 120px;
   --tabs-height: 40px;
@@ -419,11 +431,25 @@ label{
   width: -webkit-fill-available;
 }
 .tab>a {
-  background-color: var(--tabs-dark-color); 
-  padding: 10px;
+  background-color: var(--tabs-dark-color);
+  padding: 9px;
   border: var(--tabs-border-size) solid var(--tabs-border-color);
   border-radius: 10px 10px 0 0;
   border-bottom: 0;
+  min-width: fit-content;
+  top: 20px;
+  height: 25px;
+  text-decoration: wavy;
+  text-align: center;
+  position: absolute;
+  width: calc(var(--tabs-width));
+  height: calc(var(--tabs-height) + var(--tabs-border-size));
+  top: 2px;
+  left: calc(var(--tabs-width) * var(--tabs-position));
+  color: darkslategray;
+  text-shadow: 2px 1px 3px black;
+  top: 20px;
+  height: 25px;
 }
 .tab:target>a, .tab:last-of-type>a {
   background-color: var(--tabs-lite-color); 
@@ -553,30 +579,53 @@ label{
   width: 250px;
 }
 .btn{
+  position:absolute;
   width: var(--tabs-position) ;
-  padding: 5px 15px;
-  height: 30px;
-  background:black;
-  color:white;
-  font-weight: bold;
+  padding: 5px 10px;
+  height: 22px;
+  background:rgb(255, 255, 255);
+  color:rgb(0, 0, 0);
+  font-weight: normal;
   letter-spacing: 1px;
 display: inline-flex;
 border-radius: 8px 5px;
-border:1px solid blue;
+border:1px solid rgb(0, 0, 0);
 }
 
 .btn span{
-  font-size: 30px;
+  font-size: 25px;
 }
 .btn:hover{
   cursor:pointer;
-  color:black;
-  background:white;
-  border:1px solid black;
+  color:rgb(255, 255, 255);
+  background:rgb(0, 0, 0);
+  border:1px solid rgb(255, 255, 255);
 }
 
+.addDom{
+  right: 5px;
+  bottom: 5px;
+  color:white;
+  background:rgba(0, 71, 0, 0.733);
+}
 
+.tablaDom{
+  position: absolute;
+  font-size: 12px;
+  bottom: 5px;
 
+}
+
+.tablaDom th{
+ text-transform: uppercase;
+ border-bottom: 2px solid gray;
+ border-right: 1px solid black;
+ padding: 1px 2px;
+}
+.tablaDom td{
+  border-right: 1px solid black;
+  padding: 1px 2px;
+ }
 
 #fotosCli{
   position:absolute;
@@ -631,4 +680,9 @@ border:1px solid blue;
 .cerrar:hover{
   cursor:pointer;
   color:rgb(221, 0, 0);
+}
+
+.imgDetalle{
+  width:40px;
+  height: auto;
 }

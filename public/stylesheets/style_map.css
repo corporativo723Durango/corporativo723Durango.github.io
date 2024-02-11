@@ -3,8 +3,8 @@
  * that contains the map. 
  */
  #map {
-  height: 100%;
-  position:static !important;
+  position:relative !important;
+  height: 50%;
   overflow: hidden !important;
 }
 
@@ -22,7 +22,7 @@
 #description {
   font-family: Roboto;
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 #infowindow-content .title {

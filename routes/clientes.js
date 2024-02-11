@@ -37,14 +37,14 @@ router.get("/consultar",async function(req,res,next){
 })
 
 
-router.get('/newID',async function(req, res, next) {
+router.post('/newID',async function(req, res, next) {
         try{
             client = await mongoClient.connect(process.env.URL_DB723)
             var _db = client.db("db723")
             var col = _db.collection("clientes")
             let i = await col.aggregate([{'$sort': {'_id': -1}},{'$limit': 1},{'$project':{'_id':1}}]).toArray()
             console.log()
-            res.send({estatus:true,datos:i[0]._id});
+            res.send({estatus:true,datos:i[0]._id+1});
         }catch(err){
             res.send({estatus:true,datos:err});
         }
@@ -54,17 +54,17 @@ router.get('/newID',async function(req, res, next) {
 
 
 router.post('/nuevo', async function(req, res, next){
-      let _data = req.body
+      let _data_ = req.body
       try{
-            _data.domicilio = JSON.parse(_data.domicilio)
-            _data.personales = JSON.parse(_data.personales)
+            _data_.domicilios = JSON.parse(_data_.domicilios)
+            _data_.personales = JSON.parse(_data_.personales)
             client = await mongoClient.connect(process.env.URL_DB723)
             var _db = client.db("db723")
             var col = _db.collection("clientes")
             let i = await col.aggregate([{'$sort': {'_id': -1}},{'$limit': 1},{'$project':{'_id':1}}]).toArray()
             console.log(i)
-            _data['_id'] = i[0]._id + 1
-            let r = await col.insertOne(_data)
+            _data_['_id'] = i[0]._id + 1
+            let r = await col.insertOne(_data_)
             res.send({estatus:true,mensaje:"Cliente agregado satisfactoriamente"})
       }catch(errMsg){
             console.log(errMsg)

@@ -19,7 +19,7 @@
    
 
     <link rel="stylesheet" type="text/css" href="./stylesheets/style_map.css" />
-    <script type="module" src="./javascripts/mapGoogle.js"></script> 
+   
  
     <link rel='stylesheet' href='./stylesheets/style.css' />
     <link rel='stylesheet' href='./stylesheets/styleMenu.css' />
@@ -37,21 +37,50 @@
     <script src="./javascripts/secciones.js"></script>
     <link rel="stylesheet" href="./javascripts/forms/styleNew.css">
     <script src="./javascripts/polyfill.min.js"></script>
+
+                 
   </head>
   <body>
     <div class="fondo"></div>
-    <div class="content"></div>
+    <div id="contenido" class="content"></div>
+
+
+
+
     <div id="popUp" class="ocultar"></div>
     <div id="modal" class="Mimodal ocultar"><div class="hijoModal"></div></div>
     <div id="fotosCli" class="ocultar"></div>
 
+    <div id="alertasFys">
+      <div id="chidoAlertas"></div>
+      <div id="chidoConfirm"></div>
+      <div id="chidoPrompt"></div>
+    </div>
+
+    <div id="map"></div>
+
+
+
+    
+    <link href="./javascripts/inicio/css/mobiscroll.jquery.min.css" rel="stylesheet" />
+    <script src="./javascripts/inicio/js/mobiscroll.jquery.min.js"></script>
     <script src="./javascripts/popUps.js"></script>
     <script src="./javascripts/dataTable/tablas.js"></script> 
     <script src="./javascripts/jsons.js"></script>
     <script src="./javascripts/alertas.js"></script>
     <script src="./javascripts/funciones.js"></script>
     
+    <script src="./javascripts/inicio/iniciaCalendario.js"></script>
 
 
+<!--
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.56&key=AIzaSyDi2xjZpxYm9FK2BqWWxwN1CBEcckvUCho?libraries=places,search&v=weekly"></script> 
+    
+    <script src="https://unpkg.com/@googlemaps/js-api-loader/dist/index.min.js"></script>
+-->
+
+
+
+   
   </body>
 </html>

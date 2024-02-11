@@ -208,15 +208,15 @@
 }
 
 .ah-tab-content-wrapper {
-    margin: 30px 0;
+    margin: 10px 0;
 }
 
 .ah-tab-content {
     display: none;
-    padding: 30px;
-    border: 1px solid rgba(128, 128, 128, 0.285);
+    padding: 2px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.563);
+    background: rgba(255, 255, 255, 0.325);
+
 }
 
 .ah-tab-content[data-ah-tab-active="true"] {

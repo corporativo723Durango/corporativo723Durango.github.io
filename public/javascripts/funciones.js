@@ -23,62 +23,46 @@ $(function(){
            .append($("<div>").addClass("login").html($("<input>").attr({"id":"usuario","type":"text","placeholder":"Usuario","required":"true"})))
             .append($("<div>").addClass("login").html($("<input>").attr({"id":"contra","type":"password","placeholder":"Contraseña","required":"true"})))
           )
-
-         alertify.confirm().set({title:"Inicio de Sesión",selector:'input[type="text"]',resizable:true,frameless:false,onok:function(cE){onAutenticar($("#usuario").val(),hex_md5($("#contra").val()),"form")},oncancel:function(){alertify.error("Cancelado");location.reload()}}).setContent($log[0]).resizeTo("50%",240).show()
-       
+         alertify.confirm().set({title:"Inicio de Sesión",selector:'input[type="text"]',resizable:true,frameless:false,onok:function(cE){onAutenticar($("#usuario").val(),hex_md5($("#contra").val()),"form")},oncancel:function(){alertify.error("Cancelado");location.reload()}}).setContent($log[0]).resizeTo("40%",240).show()
          $(".ajs-dialog").addClass("fondoForms p35")
     }else{     
       s=JSON.parse(sesion) 
       ss = JSON.parse(s.usuario)
       onAutenticar(ss.usuario,ss.contra,"storage")
-
-      }
+    }
     
 $('.ah-tab-wrapper').horizontalmenu({
           itemClick : function(item) {
               secc = item[0].childNodes[0].data
+              console.log(secc)
               _idx = $(item).index() 
-              console.log()
               $('.ah-tab-content-wrapper .ah-tab-content').css("height","none").removeAttr('data-ah-tab-active');
-              $('.ah-tab-content-wrapper .ah-tab-content:eq(' + _idx + ')').attr('data-ah-tab-active', 'true').css({"height":($(document).height()-200)+"px"})
+              $('.ah-tab-content-wrapper .ah-tab-content:eq(' + _idx + ')').attr('data-ah-tab-active', 'true').css({"height":($(document).height()-100)+"px"})
               .html(_sec(_idx))
               return false;   //if this finction return true then will be executed http request
           }
       })
+}(jQuery));
 
 
-    }(jQuery));
-
-
-    $(document).ready(function() {  
-      
-  })
-  
-
-
+$(document).ready(function() {  
+   
+   
+})
 
 function onAutenticar(usuario,contra,viene){
   if(viene=="form" && (usuario=="" || contra=='d41d8cd98f00b204e9800998ecf8427e')){  alertify.error("Ambos campos son  requeridos ") ;   login.set({transition:"slide"}); return false}
-  
-   
+
   $("#modal").removeClass("ocultar")
   $.post("/users/autenticar",{usuario:usuario,contra:contra,estatus:true})
   .done(function(r){
-    console.log(r)
     if(r.estatus){
+      $('.ah-tab-content-wrapper .ah-tab-content:eq(0)').html(_sec(0))
       localStorage.setItem("sesion",JSON.stringify(r.datos))
-      alertify.notify(r.mensaje, 'success', 2, alertify.notify("Iniciando sesión","alert",5, ()=>{ establecerSesion(); } )); 
+      alertify.notify(r.mensaje, 'success', 2,()=>{ establecerSesion();  _sec(0)}); 
         }else{
        alertify.notify(r.mensaje2,'error',5)
     }
-    $("#modal").addClass("ocultar"); 
-
-
+    $("#modal").addClass("ocultar");
   })
-    
-    
 }
-
-
-
-

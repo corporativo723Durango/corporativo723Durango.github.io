@@ -3,42 +3,36 @@ var formidable = require("formidable")
 var fs = require("fs")
 const { exec } = require('child_process');
 var router = express.Router();
+require("dotenv").config()
 
-/* GET home page. */
-router.post('/:cliente', function(req, res, next) {
-  let cliente = req.params.ID
-  let nom = req.params.clientes.split(",")
-  
+
+router.post('/:ID/:carp/:cliente', function(req, res, next) {
+  console.log(req.params)
+  let id = req.params.ID
+  let carp = req.params.carp
+  let nom = req.params.cliente
   var form = new formidable.IncomingForm();
- console.log(req)
-    
-  form.parse(req, function (err, fields, files) {
-    let a = files.misFiles
-    a.forEach((e,i,_a)=>{
-      let oldpath = e.filepath
-      var newpath = `%CD%\\upLoadFiles\\INE\\${cliente}-${nom[i]}`
-     exec(`COPY ${oldpath} ${newpath}`, function(error){if(error)console.log(error)})
+  form.parse(req, function (err, fields, files){
+   console.log(files)
+    let e = files.misFiles[0]
+    let oldpath = e.filepath
+    let ext = e.originalFilename.split(".")[1]
+    let newName = `${id}-${nom}.${ext}`
+    var newpath = `upLoadFiles/${carp}/${newName}`
+    fs.rename(oldpath, newpath, function (err) { 
+      res.writeHead(200,{"Content-Type":"application/json"})
+      if(err==null) res.write(JSON.stringify({estatus:true,mensaje:`Imagen guardada satisfactoriamente`,datos:[newName,newpath]}))
+      else res.write(JSON.stringify(process.env.ERROR_UPIMG))
+      res.end()
 
-    })
-   
+      })
+  
     
-    
-/*
-
-    a.forEach((e,i,_a)=>{   console.log(e.filepath);
-           var newpath = `\\uploadFiles\\INE\\${cliente}-${e.originalFilename}`
-           console.log(newpath);
-          fs.rename(e.filepath, newpath, function (err) {
-            console.log(err)
-                  if (err){
-                            res.write({estatus:false,mensaje:`Ocurrio un erro al subir la imagen: ${err}`})
-                            res.end()
-                          }
-            });
-           
-  }); // foreach */
-
- res.send({estatus:true,mensaje:`Las imagenes se guardaron correctamente`})
 });
 });
+
+
+
+
+
 module.exports = router;
